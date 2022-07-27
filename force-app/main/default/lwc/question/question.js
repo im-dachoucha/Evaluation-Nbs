@@ -3,6 +3,7 @@ import { LightningElement, api } from "lwc";
 export default class Question extends LightningElement {
   @api question = {};
   timeout;
+  answers = [1, 2, 3];
 
   renderedCallback() {
     this.countdown();
@@ -12,11 +13,21 @@ export default class Question extends LightningElement {
   countdown() {
     this.timeout = setTimeout(() => {
       console.log("time's up!!");
-      this.dispatchEvent(new CustomEvent("next"));
+      this.dispatchEvent(
+        new CustomEvent("next", {
+          detail: { answers: [], data: "data" }
+        })
+      );
     }, this.question.duration * 1000);
   }
   handleClick() {
-    clearTimeout(this.timeout);
-    this.dispatchEvent(new CustomEvent("next"));
+    if (this.answers.length > 0) {
+      clearTimeout(this.timeout);
+      this.dispatchEvent(
+        new CustomEvent("next", {
+          detail: { answers: this.answers, data: "data" }
+        })
+      );
+    }
   }
 }

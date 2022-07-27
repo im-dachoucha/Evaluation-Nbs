@@ -20,7 +20,8 @@ export default class Quiz extends LightningElement {
     }
   }
 
-  handleNext() {
+  handleNext({ detail: { answers } }) {
+    console.log(answers);
     this.next();
   }
 }

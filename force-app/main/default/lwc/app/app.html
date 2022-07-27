@@ -3,8 +3,8 @@
     <c-Loader></c-Loader>
   </template>
   <template if:false={isLoading}>
-    <template if:true={dataIsLoaded}
-      ><p>{quizId}</p>
+    <template if:true={dataIsLoaded}>
+      <p>{quizId}</p>
       <c-Quiz questions={questions}></c-Quiz>
     </template>
     <template if:false={dataIsLoaded}><p>Quiz not found</p></template>
