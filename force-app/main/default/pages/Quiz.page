@@ -1,0 +1,17 @@
+<apex:page showHeader="false">
+  <apex:includeLightning />
+
+  <div id="lightning" />
+
+  <script>
+    $Lightning.use("c:NBStestAura", function () {
+      $Lightning.createComponent("c:App",
+        { label: "Press Me!" },
+        "lightning",
+        function (cmp) {
+          console.log(`The App Component is created!!`);
+        }
+      );
+    });
+  </script>
+</apex:page>

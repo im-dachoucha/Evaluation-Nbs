@@ -1,0 +1,10 @@
+<template>
+  <div if:false={end}>
+    <p>{questions.length} questions in total</p>
+    <p>current idx {idx}</p>
+    <c-Question onnext={handleNext} question={question}></c-Question>
+  </div>
+  <div if:true={end}>
+    <p>Quiz finished!!!</p>
+  </div>
+</template>
