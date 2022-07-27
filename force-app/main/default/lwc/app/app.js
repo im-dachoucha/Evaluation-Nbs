@@ -1,6 +1,12 @@
 import { LightningElement } from "lwc";
 
 export default class App extends LightningElement {
+  dataIsLoaded = false;
+  isLoading = true;
+  quizId;
+  connectedCallback() {
+    this.getQuizId();
+  }
   questions = [
     {
       id: "question1",
@@ -75,4 +81,14 @@ export default class App extends LightningElement {
       ]
     }
   ];
+  getQuizId() {
+    /* eslint-disable @lwc/lwc/no-async-operation */
+    setTimeout(() => {
+      const url = new URL(window.location.href);
+      this.quizId = url.searchParams.get("quiz");
+      console.log(this.quizId);
+      this.isLoading = false;
+      this.dataIsLoaded = true;
+    }, 4000);
+  }
 }
