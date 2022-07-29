@@ -35,7 +35,7 @@ export default class App extends LightningElement {
     {
       id: "question2",
       explanation: "Question two",
-      duration: 5,
+      duration: 10,
       points: 10,
       options: [
         {
@@ -59,7 +59,7 @@ export default class App extends LightningElement {
     {
       id: "question3",
       explanation: "Question three",
-      duration: 5,
+      duration: 20,
       points: 10,
       options: [
         {
@@ -86,9 +86,14 @@ export default class App extends LightningElement {
     setTimeout(() => {
       const url = new URL(window.location.href);
       this.quizId = url.searchParams.get("quiz");
-      console.log(this.quizId);
-      this.isLoading = false;
-      this.dataIsLoaded = true;
-    }, 4000);
+      if (this.quizId) {
+        console.log(this.quizId);
+        this.isLoading = false;
+        this.dataIsLoaded = true;
+      } else {
+        this.isLoading = false;
+        this.dataIsLoaded = false;
+      }
+    }, 2000);
   }
 }
