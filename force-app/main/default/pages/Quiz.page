@@ -5,11 +5,11 @@
 
   <script>
     $Lightning.use("c:NBStestAura", function () {
-      $Lightning.createComponent("c:App",
+      $Lightning.createComponent("c:Quiz",
         { label: "Press Me!" },
         "lightning",
         function (cmp) {
-          console.log(`The App Component is created!!`);
+          console.log(`The Quiz Component is created!!`);
         }
       );
     });

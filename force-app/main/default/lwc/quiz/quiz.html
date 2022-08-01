@@ -1,10 +1,18 @@
 <template>
-  <div if:false={end}>
-    <p>{questions.length} questions in total</p>
-    <p>current idx {idx}</p>
-    <c-Question onnext={handleNext} question={question}></c-Question>
-  </div>
-  <div if:true={end}>
-    <p>Quiz finished!!!</p>
-  </div>
+  <template if:true={isLoading}><c-Loader></c-Loader></template>
+
+  <template if:false={isLoading}>
+    <template if:true={dataIsLoaded}>
+      <p>{quizId}</p>
+      <div if:false={end}>
+        <p>{questions.length} questions in total</p>
+        <p>current idx {idx}</p>
+        <c-Question onnext={handleNext} question={question}></c-Question>
+      </div>
+      <div if:true={end}>
+        <p>Quiz finished!!!</p>
+      </div>
+    </template>
+    <template if:false={dataIsLoaded}><p>Quiz not found</p></template>
+  </template>
 </template>
