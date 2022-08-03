@@ -2,11 +2,16 @@ import { LightningElement, api } from "lwc";
 
 export default class Question extends LightningElement {
   @api question = {};
+  @api idx;
+  @api length;
+  options = [];
   timeout;
   answers = [1, 2, 3];
 
   renderedCallback() {
-    this.countdown();
+    this.options = this.question.options;
+    // ! uncomment this line
+    // this.countdown();
   }
 
   /* eslint-disable @lwc/lwc/no-async-operation */

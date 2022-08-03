@@ -3,11 +3,20 @@
 
   <template if:false={isLoading}>
     <template if:true={dataIsLoaded}>
-      <p>{quizId}</p>
       <div if:false={end}>
-        <p>{questions.length} questions in total</p>
-        <p>current idx {idx}</p>
-        <c-Question onnext={handleNext} question={question}></c-Question>
+        <div class="quiz_header">
+          <div class="imgs">
+            <img src={nbsLogo} alt="Nbs Consulting logo" />
+            <img src={salesforceLogo} alt="Salesforce logo" />
+          </div>
+          <p class="quiz_title">Quiz NBS Consulting pfa 23</p>
+        </div>
+        <c-Question
+          onnext={handleNext}
+          idx={idx}
+          length={questions.length}
+          question={question}
+        ></c-Question>
       </div>
       <div if:true={end}>
         <p>Quiz finished!!!</p>

@@ -17,7 +17,8 @@ export default class Timer extends LightningElement {
 
   connectedCallback() {
     // this.timeLeft = parseInt(this.duration, 10);
-    this.countDown();
+    // ! uncomment this line
+    // this.countDown();
   }
 
   countDown() {

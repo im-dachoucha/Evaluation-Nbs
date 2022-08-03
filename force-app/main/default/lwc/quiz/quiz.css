@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.quiz_title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.quiz_header {
+  margin: auto;
+  max-width: 1200px;
+}
+
+.imgs {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,9 @@
+.option {
+  color: white;
+  font-size: medium;
+  background-color: #00a1e0;
+  /* width: 200px; */
+  text-align: center;
+  padding-block: 10px;
+  cursor: pointer;
+}
