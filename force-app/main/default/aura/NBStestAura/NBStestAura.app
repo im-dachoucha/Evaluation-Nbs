@@ -3,5 +3,5 @@
   extends="ltng:outApp"
   implements="ltng:AllowGuestAccess"
 >
-  <aura:dependency resource="c:App" />
+  <aura:dependency resource="c:Quiz" />
 </aura:application>
