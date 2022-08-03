@@ -1,12 +1,14 @@
 import { LightningElement, track } from "lwc";
+import getQuizById from "@salesforce/apex/QuizController.getQuizById";
 
+// ! the first question doesn't get passed
 export default class Quiz extends LightningElement {
   @track idx = 0;
   @track question = {};
 
   dataIsLoaded = false;
   isLoading = true;
-  quizId;
+  quizId = null;
   end = false;
 
   questions = [
@@ -85,24 +87,48 @@ export default class Quiz extends LightningElement {
   ];
 
   connectedCallback() {
-    this.getQuizId();
+    this.startQuiz();
   }
 
-  getQuizId() {
-    /* eslint-disable @lwc/lwc/no-async-operation */
-    setTimeout(() => {
-      const url = new URL(window.location.href);
-      this.quizId = url.searchParams.get("quiz");
-      if (this.quizId) {
-        console.log(this.quizId);
-        this.isLoading = false;
-        this.dataIsLoaded = true;
-        this.question = this.questions[this.idx];
+  async startQuiz() {
+    const url = new URL(window.location.href);
+    this.quizId = url.searchParams.get("quiz");
+    if (this.quizId === null) {
+      this.isLoading = false;
+      this.dataIsLoaded = false;
+      return;
+    }
+
+    try {
+      const res = await getQuizById({ quizId: this.quizId });
+      console.log(res);
+      if (res !== null) {
+        const currentTime = new Date(new Date().getTime());
+        const beginTime = new Date(res.BeginTime__c);
+        const expireTime = new Date(res.ExpireTime__c);
+
+        console.log(`current time : ${currentTime}`);
+        console.log(`begin time : ${beginTime}`);
+        console.log(`expire time : ${expireTime}`);
+
+        if (currentTime < beginTime || currentTime > expireTime) {
+          console.log("not in time!!");
+          this.isLoading = false;
+          this.dataIsLoaded = false;
+        } else {
+          // todo: query related questions and options
+          this.isLoading = false;
+          this.dataIsLoaded = true;
+        }
       } else {
         this.isLoading = false;
         this.dataIsLoaded = false;
       }
-    }, 2000);
+    } catch (err) {
+      console.log(err);
+      this.isLoading = false;
+      this.dataIsLoaded = false;
+    }
   }
 
   next() {
