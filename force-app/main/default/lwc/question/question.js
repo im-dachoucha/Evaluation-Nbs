@@ -7,17 +7,21 @@ export default class Question extends LightningElement {
   options = [];
   timeout;
   answers = [1, 2, 3];
+  hasRendered = false;
 
   renderedCallback() {
-    this.options = this.question.options;
-    // ! uncomment this line
-    // this.countdown();
+    if (!this.hasRendered) {
+      this.options = this.question.options;
+      this.hasRendered = true;
+      this.countdown();
+    }
   }
 
   /* eslint-disable @lwc/lwc/no-async-operation */
   countdown() {
     this.timeout = setTimeout(() => {
       console.log("time's up!!");
+      this.hasRendered = false;
       this.dispatchEvent(
         new CustomEvent("next", {
           detail: { answers: [], data: "data" }
@@ -26,8 +30,9 @@ export default class Question extends LightningElement {
     }, this.question.duration * 1000);
   }
   handleClick() {
+    clearTimeout(this.timeout);
     if (this.answers.length > 0) {
-      clearTimeout(this.timeout);
+      this.hasRendered = false;
       this.dispatchEvent(
         new CustomEvent("next", {
           detail: { answers: this.answers, data: "data" }

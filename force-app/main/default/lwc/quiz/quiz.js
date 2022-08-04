@@ -3,7 +3,6 @@ import getQuizById from "@salesforce/apex/QuizController.getQuizById";
 import NBS_LOGO from "@salesforce/resourceUrl/nbs_logo";
 import SALESFORCE_LOGO from "@salesforce/resourceUrl/salesforce_logo";
 
-// ! the first question doesn't get passed
 export default class Quiz extends LightningElement {
   @track idx = 0;
   @track question = {};
@@ -91,8 +90,6 @@ export default class Quiz extends LightningElement {
   ];
 
   connectedCallback() {
-    // ! fix this
-    this.question = this.questions[this.idx];
     this.startQuiz();
   }
 
@@ -123,6 +120,7 @@ export default class Quiz extends LightningElement {
           this.dataIsLoaded = false;
         } else {
           // todo: query related questions and options
+          this.question = this.questions[this.idx];
           this.isLoading = false;
           this.dataIsLoaded = true;
         }
