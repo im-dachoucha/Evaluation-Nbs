@@ -16,8 +16,7 @@
 .next {
   color: white;
   font-size: medium;
-  padding-inline: 20px;
-  max-width: 200px;
+  width: 150px;
   text-align: center;
 }
 .exit {
