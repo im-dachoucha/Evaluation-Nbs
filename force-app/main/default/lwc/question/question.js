@@ -20,7 +20,7 @@ export default class Question extends LightningElement {
     if (!this.hasRendered) {
       this.options = this.question.options;
       this.hasRendered = true;
-      this.countdown();
+      // this.countdown();
     }
   }
 
