@@ -18,9 +18,9 @@ export default class Question extends LightningElement {
 
   renderedCallback() {
     if (!this.hasRendered) {
-      this.options = this.question.options;
+      this.options = this.question.Options__r;
       this.hasRendered = true;
-      // this.countdown();
+      this.countdown();
     }
   }
 
@@ -34,7 +34,7 @@ export default class Question extends LightningElement {
           detail: { answers: [], data: "data" }
         })
       );
-    }, this.question.duration * 1000);
+    }, this.question.Duration__c * 1000);
   }
   handleClick() {
     clearTimeout(this.timeout);

@@ -2,9 +2,10 @@
   <div class="question">
     <div class="q_header">
       <p>Question {idx} of {length}</p>
-      <c-Timer duration={question.duration}></c-Timer>
+      <c-Timer duration={question.Duration__c}></c-Timer>
     </div>
-    <p class="q_value">{question.explanation}</p>
+    <lightning-formatted-rich-text class="q_value" value={question.Value__c}>
+    </lightning-formatted-rich-text>
     <div class="options">
       <div for:each={options} for:item="option" key={option.id} class="option">
         <c-Option option={option}></c-Option>
