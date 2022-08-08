@@ -7,18 +7,10 @@ export default class Timer extends LightningElement {
   }
   set duration(value) {
     this._duration = value - 1;
-    // this.timeLeft = value - 1;
   }
-  //   @track timeLeft;
-
-  //   renderedCallback() {
-  //     if (this.timeLeft < 0) this.timeLeft = parseInt(this.duration, 10);
-  //   }
 
   connectedCallback() {
-    // this.timeLeft = parseInt(this.duration, 10);
-    // ! uncomment this line
-    // this.countDown();
+    this.countDown();
   }
 
   countDown() {

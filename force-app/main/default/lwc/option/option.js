@@ -1,5 +1,12 @@
-import { LightningElement, api } from "lwc";
+import { LightningElement, api, track } from "lwc";
 
 export default class Option extends LightningElement {
-  @api option;
+  @api option
+  @track isChecked = false
+  @track classList = "option"
+
+  toggleIsCheck() {
+    this.isChecked = !this.isChecked;
+    this.classList = this.isChecked ? "option checked" : "option"
+  }
 }
