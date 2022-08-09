@@ -4,8 +4,19 @@ export default class Question extends LightningElement {
   @api question = {};
   @api length;
   options = [];
+  handletoggleCheck({ detail }) {
+    console.log(`detail `, JSON.parse(JSON.stringify(detail)));
+
+    const idx = this.answers.indexOf(detail.id);
+    if (idx === -1) {
+      this.answers.push(detail.id);
+    } else {
+      this.answers.splice(idx, 1);
+    }
+    console.log(`answers `, this.answers);
+  }
   timeout;
-  answers = [1, 2, 3];
+  answers = [];
   hasRendered = false;
   _idx;
   @api
