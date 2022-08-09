@@ -8,7 +8,7 @@
     </lightning-formatted-rich-text>
     <div class="options">
       <div for:each={options} for:item="option" key={option.id} class="option">
-        <c-Option option={option}></c-Option>
+        <c-Option option={option} ontogglecheck={handletoggleCheck}></c-Option>
       </div>
     </div>
     <div class="btns">
