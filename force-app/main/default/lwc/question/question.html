@@ -2,18 +2,26 @@
   <div class="question">
     <div class="q_header">
       <p>Question {idx} of {length}</p>
-      <c-Timer duration={question.Duration__c}></c-Timer>
+      <!-- <c-Timer duration={question.Duration__c}></c-Timer> -->
+      <c-Timer duration="120"></c-Timer>
     </div>
     <lightning-formatted-rich-text class="q_value" value={question.Value__c}>
     </lightning-formatted-rich-text>
     <div class="options">
-      <div for:each={options} for:item="option" key={option.id} class="option">
+      <div
+        for:each={_question.Options__r}
+        for:item="option"
+        key={option.id}
+        class="option"
+      >
         <c-Option option={option} ontogglecheck={handletoggleCheck}></c-Option>
       </div>
     </div>
     <div class="btns">
-      <button class="exit">Exit</button>
-      <button class="next" onclick={handleClick}>Next</button>
+      <button class="previous" data-event="previous" onclick={handleClick}>
+        Previous
+      </button>
+      <button class="next" data-event="next" onclick={handleClick}>Next</button>
     </div>
   </div>
 </template>
