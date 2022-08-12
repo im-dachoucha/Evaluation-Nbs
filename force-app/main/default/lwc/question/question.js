@@ -58,6 +58,11 @@ export default class Question extends LightningElement {
       return option;
     });
     this._question = { ...this._question };
+    this.dispatchEvent(
+      new CustomEvent("syncoptions", {
+        detail: { res: this._question }
+      })
+    );
     // console.table(this._question.Options__r)
   }
 }
