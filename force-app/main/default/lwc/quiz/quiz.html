@@ -1,5 +1,7 @@
 <template>
-  <template if:true={isLoading}><lightning-spinner></lightning-spinner></template>
+  <template if:true={isLoading}
+    ><lightning-spinner></lightning-spinner
+  ></template>
 
   <template if:false={isLoading}>
     <template if:true={dataIsLoaded}>
@@ -13,7 +15,7 @@
         </div>
         <c-Question
           onnext={handleNext}
-          idx={idx}
+          onprevious={handlePrevious}
           length={questions.length}
           question={question}
         ></c-Question>
