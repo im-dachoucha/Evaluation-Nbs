@@ -32,7 +32,6 @@ export default class Quiz extends LightningElement {
 
     try {
       const res = await getQuizById({ quizId: this.quizId });
-      console.log(res);
       if (res !== null) {
         const currentTime = new Date(new Date().getTime());
         const beginTime = new Date(res.BeginTime__c);
@@ -50,7 +49,6 @@ export default class Quiz extends LightningElement {
           const questionsRes = await getQuizQuestions({ quizId: this.quizId });
           this.questions = JSON.parse(JSON.stringify(questionsRes));
           this.fixData();
-          // console.log(this.questions);
           this.question = this.questions[this.idx];
           this.isLoading = false;
           this.dataIsLoaded = true;
@@ -68,12 +66,21 @@ export default class Quiz extends LightningElement {
 
   fixData = () => {
     this.questions = this.questions.map((question, idx) => {
-      question.idx = idx;
+      question.idx = idx + 1;
       question.Options__r?.forEach((option) => {
         option.isChecked = false;
       });
       return question;
     });
+  };
+
+  handleJsumpToQuestion = ({ detail: { index } }) => {
+    this.idx = index;
+    this.question = this.questions[this.idx];
+  };
+
+  handleSyncOptions = ({ detail: { res } }) => {
+    this.updateQuestions(JSON.parse(JSON.stringify(res)));
   };
 
   next() {
@@ -82,7 +89,6 @@ export default class Quiz extends LightningElement {
       this.question = this.questions[this.idx];
     } else {
       console.log("that was the last question!!");
-      // this.end = true;
     }
   }
 
@@ -98,18 +104,14 @@ export default class Quiz extends LightningElement {
 
   handleNext({ detail: { res } }) {
     this.updateQuestions(JSON.parse(JSON.stringify(res)));
-    // console.log(JSON.parse(JSON.stringify(res)));
     this.next();
   }
   handlePrevious({ detail: { res } }) {
     this.updateQuestions(JSON.parse(JSON.stringify(res)));
-    // console.log(JSON.parse(JSON.stringify(res)));
-    console.log(this.questions);
     this.previous();
   }
 
   updateQuestions = (qItem) => {
-    console.log("here");
     this.questions = this.questions.map((q) => {
       if (q.Id === qItem.Id) q = { ...qItem };
       return q;
