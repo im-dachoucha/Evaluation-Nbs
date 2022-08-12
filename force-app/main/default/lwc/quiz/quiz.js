@@ -16,80 +16,6 @@ export default class Quiz extends LightningElement {
   end = false;
 
   questions = [];
-  // questions = [
-  //   {
-  //     id: "question1",
-  //     explanation: "Question one",
-  //     duration: 5,
-  //     points: 10,
-  //     options: [
-  //       {
-  //         id: "q1op1",
-  //         value: "Option one"
-  //       },
-  //       {
-  //         id: "q1op2",
-  //         value: "Option two"
-  //       },
-  //       {
-  //         id: "q1op3",
-  //         value: "Option three"
-  //       },
-  //       {
-  //         id: "q1op4",
-  //         value: "Option four"
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     id: "question2",
-  //     explanation: "Question two",
-  //     duration: 10,
-  //     points: 10,
-  //     options: [
-  //       {
-  //         id: "q2op1",
-  //         value: "Option one"
-  //       },
-  //       {
-  //         id: "q2op2",
-  //         value: "Option two"
-  //       },
-  //       {
-  //         id: "q2op3",
-  //         value: "Option three"
-  //       },
-  //       {
-  //         id: "q2op4",
-  //         value: "Option four"
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     id: "question3",
-  //     explanation: "Question three",
-  //     duration: 20,
-  //     points: 10,
-  //     options: [
-  //       {
-  //         id: "q3op1",
-  //         value: "Option one"
-  //       },
-  //       {
-  //         id: "q3op2",
-  //         value: "Option two"
-  //       },
-  //       {
-  //         id: "q3op3",
-  //         value: "Option three"
-  //       },
-  //       {
-  //         id: "q3op4",
-  //         value: "Option four"
-  //       }
-  //     ]
-  //   }
-  // ];
 
   connectedCallback() {
     this.startQuiz();
@@ -111,20 +37,20 @@ export default class Quiz extends LightningElement {
         const currentTime = new Date(new Date().getTime());
         const beginTime = new Date(res.BeginTime__c);
         const expireTime = new Date(res.ExpireTime__c);
-
-        console.log(`current time : ${currentTime}`);
-        console.log(`begin time : ${beginTime}`);
-        console.log(`expire time : ${expireTime}`);
+        // console.log(`current time : ${currentTime}`);
+        // console.log(`begin time : ${beginTime}`);
+        // console.log(`expire time : ${expireTime}`);
 
         if (currentTime < beginTime || currentTime > expireTime) {
           console.log("not in time!!");
           this.isLoading = false;
           this.dataIsLoaded = false;
         } else {
-          // todo: query related questions and options
+          // done: query related questions and options
           const questionsRes = await getQuizQuestions({ quizId: this.quizId });
           this.questions = JSON.parse(JSON.stringify(questionsRes));
-          console.log(this.questions);
+          this.fixData();
+          // console.log(this.questions);
           this.question = this.questions[this.idx];
           this.isLoading = false;
           this.dataIsLoaded = true;
@@ -140,18 +66,53 @@ export default class Quiz extends LightningElement {
     }
   }
 
+  fixData = () => {
+    this.questions = this.questions.map((question, idx) => {
+      question.idx = idx;
+      question.Options__r?.forEach((option) => {
+        option.isChecked = false;
+      });
+      return question;
+    });
+  };
+
   next() {
     if (this.idx < this.questions.length - 1) {
       this.idx++;
       this.question = this.questions[this.idx];
     } else {
       console.log("that was the last question!!");
-      this.end = true;
+      // this.end = true;
     }
   }
 
-  handleNext({ detail: { answers } }) {
-    console.log(answers);
+  previous() {
+    if (this.idx > 0) {
+      this.idx--;
+      this.question = this.questions[this.idx];
+    } else {
+      console.log("this is the first question!!");
+      // this.end = true;
+    }
+  }
+
+  handleNext({ detail: { res } }) {
+    this.updateQuestions(JSON.parse(JSON.stringify(res)));
+    // console.log(JSON.parse(JSON.stringify(res)));
     this.next();
   }
+  handlePrevious({ detail: { res } }) {
+    this.updateQuestions(JSON.parse(JSON.stringify(res)));
+    // console.log(JSON.parse(JSON.stringify(res)));
+    console.log(this.questions);
+    this.previous();
+  }
+
+  updateQuestions = (qItem) => {
+    console.log("here");
+    this.questions = this.questions.map((q) => {
+      if (q.Id === qItem.Id) q = { ...qItem };
+      return q;
+    });
+  };
 }
