@@ -74,7 +74,7 @@ export default class Quiz extends LightningElement {
     });
   };
 
-  handleJsumpToQuestion = ({ detail: { index } }) => {
+  handleJumpToQuestion = ({ detail: { index } }) => {
     this.idx = index;
     this.question = this.questions[this.idx];
   };
