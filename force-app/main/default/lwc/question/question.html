@@ -1,10 +1,5 @@
 <template>
   <div class="question">
-    <div class="q_header">
-      <p>Question {idx} of {length}</p>
-      <!-- <c-Timer duration={question.Duration__c}></c-Timer> -->
-      <c-Timer duration="120"></c-Timer>
-    </div>
     <lightning-formatted-rich-text class="q_value" value={question.Value__c}>
     </lightning-formatted-rich-text>
     <div class="options">

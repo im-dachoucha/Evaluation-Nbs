@@ -1,7 +1,7 @@
 <template>
-  <template if:true={isLoading}
-    ><lightning-spinner></lightning-spinner
-  ></template>
+  <template if:true={isLoading}>
+    <lightning-spinner></lightning-spinner>
+  </template>
 
   <template if:false={isLoading}>
     <template if:true={dataIsLoaded}>
@@ -13,13 +13,19 @@
           </div>
           <p class="quiz_title">Quiz NBS Consulting pfa '23</p>
         </div>
-        <c-Question
-          onnext={handleNext}
-          onprevious={handlePrevious}
-          onsyncoptions={handleSyncOptions}
-          length={questions.length}
-          question={question}
-        ></c-Question>
+        <div class="question">
+          <div class="question_header">
+            <p>Question {question.idx} of {questions.length}</p>
+            <c-Timer duration={duration}></c-Timer>
+          </div>
+          <c-Question
+            onnext={handleNext}
+            onprevious={handlePrevious}
+            onsyncoptions={handleSyncOptions}
+            length={questions.length}
+            question={question}
+          ></c-Question>
+        </div>
         <div class="navigation">
           <c-question-label
             for:each={questions}

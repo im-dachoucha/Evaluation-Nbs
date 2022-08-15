@@ -17,6 +17,8 @@ export default class Quiz extends LightningElement {
 
   questions = [];
 
+  @track duration = 0;
+
   connectedCallback() {
     this.startQuiz();
   }
@@ -52,6 +54,7 @@ export default class Quiz extends LightningElement {
           this.question = this.questions[this.idx];
           this.isLoading = false;
           this.dataIsLoaded = true;
+          this.countDown();
         }
       } else {
         this.isLoading = false;
@@ -64,9 +67,18 @@ export default class Quiz extends LightningElement {
     }
   }
 
+  /* eslint-disable @lwc/lwc/no-async-operation */
+  countDown() {
+    this.timeout = setTimeout(() => {
+      console.log("time's up!!");
+      this.end = true;
+    }, this.duration * 1000);
+  }
+
   fixData = () => {
     this.questions = this.questions.map((question, idx) => {
       question.idx = idx + 1;
+      this.duration += question.Duration__c;
       question.Options__r?.forEach((option) => {
         option.isChecked = false;
       });
