@@ -48,6 +48,7 @@ export default class Quiz extends LightningElement {
           this.dataIsLoaded = false;
         } else {
           // done: query related questions and options
+          this.duration = parseInt(res.Duration__c, 10);
           const questionsRes = await getQuizQuestions({ quizId: this.quizId });
           this.questions = JSON.parse(JSON.stringify(questionsRes));
           this.fixData();
@@ -78,7 +79,7 @@ export default class Quiz extends LightningElement {
   fixData = () => {
     this.questions = this.questions.map((question, idx) => {
       question.idx = idx + 1;
-      this.duration += question.Duration__c;
+      // this.duration += question.Duration__c;
       question.Options__r?.forEach((option) => {
         option.isChecked = false;
       });
