@@ -1,9 +1,11 @@
 <template>
-  <lightning-progress-ring
-    value={progressLeft}
-    size="large"
-    variant={variant}
-    style="font-size: x-large"
-  ></lightning-progress-ring>
-  <p>Time left : {timeLeftExpression}</p>
+  <div class="timer">
+    <lightning-progress-ring
+      value={progressLeft}
+      size="large"
+      variant={variant}
+      style="font-size: x-large"
+    ></lightning-progress-ring>
+    <p>Time left : {timeLeftExpression}</p>
+  </div>
 </template>

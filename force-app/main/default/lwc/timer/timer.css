@@ -1,1 +1,5 @@
-/* ddd */
+.timer {
+  flex-grow: 1;
+  width: max-content;
+  text-align: center;
+}
