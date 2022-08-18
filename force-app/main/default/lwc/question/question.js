@@ -16,13 +16,16 @@ export default class Question extends LightningElement {
   }
 
   handleClick(event) {
-    // if (this._question.Options__r?.filter(option => option.isChecked).length > 0) {
-    this.dispatchEvent(
-      new CustomEvent(event.target.dataset.event, {
-        detail: { res: this._question }
-      })
-    );
-    // }
+    if (
+      this._question.Options__r?.filter((option) => option.isChecked).length ===
+      parseInt(this._question.Answer__c, 10)
+    ) {
+      this.dispatchEvent(
+        new CustomEvent(event.target.dataset.event, {
+          detail: { res: this._question }
+        })
+      );
+    }
   }
 
   handletoggleCheck({ detail: { id } }) {

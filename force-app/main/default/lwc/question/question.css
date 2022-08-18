@@ -66,3 +66,13 @@
   /* padding: 30px 50px; */
   gap: 30px;
 }
+
+.nbr_answers {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.nbr_answers::before {
+  content: "*";
+  color: red;
+}

@@ -2,6 +2,7 @@
   <div class="question">
     <lightning-formatted-rich-text class="q_value" value={question.Value__c}>
     </lightning-formatted-rich-text>
+    <p class="nbr_answers">{question.Answer__c} correct option(s)</p>
     <div class="options">
       <div
         for:each={_question.Options__r}

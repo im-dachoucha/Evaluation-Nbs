@@ -13,7 +13,7 @@ public without sharing class QuizController {
      @AuraEnabled
      public static List<Question__c> getQuizQuestions(string quizId){
          try {
-            List<Question__c> QuestionList = [SELECT Value__c, duration__c , (SELECT Id, Value__c FROM Options__r)
+            List<Question__c> QuestionList = [SELECT Value__c, duration__c, answer__c, (SELECT Id, Value__c FROM Options__r)
                                                 FROM Question__c WHERE Id IN (
                                                     SELECT Question__c
                                                     FROM Questionquiz__c
