@@ -44,10 +44,10 @@
 
 .q_value,
 .q_header {
-  text-align: center;
   font-size: 20px;
 }
 .q_header {
+  text-align: center;
   display: flex;
   justify-content: space-between;
   font-weight: 700;

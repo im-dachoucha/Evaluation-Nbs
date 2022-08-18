@@ -1,5 +1,8 @@
 .label-item {
   cursor: pointer;
   padding: 5px;
+  width: 30px;
+  height: 30px;
   border: 1px solid black;
+  text-align: center;
 }

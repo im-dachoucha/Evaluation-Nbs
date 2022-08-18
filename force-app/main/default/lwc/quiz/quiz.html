@@ -13,10 +13,22 @@
           </div>
           <p class="quiz_title">Quiz NBS Consulting pfa '23</p>
         </div>
-        <div class="question">
+        <div class="quiz_info container">
+          <div class="navigation">
+            <c-question-label
+              for:each={questions}
+              for:item="q"
+              key={q.Id}
+              idx={q.idx}
+              onjumptoquestion={handleJumpToQuestion}
+            >
+            </c-question-label>
+          </div>
+          <c-Timer duration={duration}></c-Timer>
+        </div>
+        <div class="question container">
           <div class="question_header">
             <p>Question {question.idx} of {questions.length}</p>
-            <c-Timer duration={duration}></c-Timer>
           </div>
           <c-Question
             onnext={handleNext}
@@ -25,16 +37,6 @@
             length={questions.length}
             question={question}
           ></c-Question>
-        </div>
-        <div class="navigation">
-          <c-question-label
-            for:each={questions}
-            for:item="q"
-            key={q.Id}
-            idx={q.idx}
-            onjumptoquestion={handleJumpToQuestion}
-          >
-          </c-question-label>
         </div>
       </div>
       <div if:true={end}>
