@@ -14,12 +14,16 @@ export default class Question extends LightningElement {
   connectedCallback() {
     this.options = this._question.Options__r;
   }
+  // renderedCallback() {
+  //   console.log(this._question);
+  // }
 
   handleClick(event) {
     if (
       this._question.Options__r?.filter((option) => option.isChecked).length ===
       parseInt(this._question.Answer__c, 10)
     ) {
+      this._question = { ...this._question, isAnswered: true };
       this.dispatchEvent(
         new CustomEvent(event.target.dataset.event, {
           detail: { res: this._question }
@@ -34,10 +38,10 @@ export default class Question extends LightningElement {
       return option;
     });
     this._question = { ...this._question };
-    this.dispatchEvent(
-      new CustomEvent("syncoptions", {
-        detail: { res: this._question }
-      })
-    );
+    // this.dispatchEvent(
+    //   new CustomEvent("syncoptions", {
+    //     detail: { res: this._question }
+    //   })
+    // );
   }
 }
