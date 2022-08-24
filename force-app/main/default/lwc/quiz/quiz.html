@@ -14,18 +14,20 @@
       </div>
       <div if:false={end}>
         <div class="quiz_info container">
-          <div class="navigation">
-            <c-question-label
-              for:each={questions}
-              for:item="q"
-              key={q.Id}
-              idx={q.idx}
-              isanswered={q.isAnswered}
-              onjumptoquestion={handleJumpToQuestion}
-            >
-            </c-question-label>
+          <div class="question2 container2">
+            <div class="navigation">
+              <c-question-label
+                for:each={questions}
+                for:item="q"
+                key={q.Id}
+                idx={q.idx}
+                isanswered={q.isAnswered}
+                onjumptoquestion={handleJumpToQuestion}
+              >
+              </c-question-label>
+            </div>
+            <c-Timer class="time" duration={duration}></c-Timer>
           </div>
-          <c-Timer duration={duration}></c-Timer>
         </div>
         <div class="question container">
           <div class="question_header">

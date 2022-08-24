@@ -14,7 +14,7 @@ export default class Quiz extends LightningElement {
   isLoading = true;
   quizId = null;
   end = false;
-
+  
   questions = [];
 
   @track duration = 0;
@@ -126,7 +126,10 @@ export default class Quiz extends LightningElement {
 
   updateQuestions = (qItem) => {
     this.questions = this.questions.map((q) => {
-      if (q.Id === qItem.Id) q = { ...qItem };
+      if (q.Id === qItem.Id) {
+        q = { ...qItem };
+        console.log(q);
+      }
       return q;
     });
   };

@@ -9,4 +9,6 @@
 
 .isAnswered {
   border-color: greenyellow;
+  background-color: #38dd3f;
+  color: beige;
 }
