@@ -9,7 +9,7 @@ export default class Quiz extends LightningElement {
   @track question = {};
   nbsLogo = NBS_LOGO;
   salesforceLogo = SALESFORCE_LOGO;
-
+  quizName = "";
   dataIsLoaded = false;
   isLoading = true;
   quizId = null;
@@ -47,6 +47,7 @@ export default class Quiz extends LightningElement {
           this.isLoading = false;
           this.dataIsLoaded = false;
         } else {
+          this.quizName = res.Name;
           this.duration = parseInt(res.Duration__c, 10);
           const questionsRes = await getQuizQuestions({ quizId: this.quizId });
           this.questions = JSON.parse(JSON.stringify(questionsRes));
