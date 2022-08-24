@@ -5,21 +5,22 @@
 
   <template if:false={isLoading}>
     <template if:true={dataIsLoaded}>
-      <div if:false={end}>
-        <div class="quiz_header">
-          <div class="imgs">
-            <img src={nbsLogo} alt="Nbs Consulting logo" />
-            <img src={salesforceLogo} alt="Salesforce logo" />
-          </div>
-          <p class="quiz_title">Quiz NBS Consulting pfa '23</p>
+      <div class="quiz_header">
+        <div class="imgs">
+          <img src={nbsLogo} alt="Nbs Consulting logo" />
+          <img src={salesforceLogo} alt="Salesforce logo" />
         </div>
+        <p class="quiz_title">Quiz NBS Consulting pfa '23</p>
+      </div>
+      <div if:false={end}>
         <div class="quiz_info container">
           <div class="navigation">
             <c-question-label
-              for:each={test}
+              for:each={questions}
               for:item="q"
               key={q.Id}
               idx={q.idx}
+              isanswered={q.isAnswered}
               onjumptoquestion={handleJumpToQuestion}
             >
             </c-question-label>
