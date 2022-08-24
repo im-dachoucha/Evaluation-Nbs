@@ -13,23 +13,21 @@
         <p class="quiz_title">Quiz NBS Consulting pfa '23</p>
       </div>
       <div if:false={end}>
-        <div class="quiz_info container">
-          <div class="question2 container2">
-            <div class="navigation">
-              <c-question-label
-                for:each={questions}
-                for:item="q"
-                key={q.Id}
-                idx={q.idx}
-                isanswered={q.isAnswered}
-                onjumptoquestion={handleJumpToQuestion}
-              >
-              </c-question-label>
-            </div>
-            <c-Timer class="time" duration={duration}></c-Timer>
+        <div class="quiz_info container box">
+          <div class="navigation">
+            <c-question-label
+              for:each={questions}
+              for:item="q"
+              key={q.Id}
+              idx={q.idx}
+              isanswered={q.isAnswered}
+              onjumptoquestion={handleJumpToQuestion}
+            >
+            </c-question-label>
           </div>
+          <c-Timer class="time" duration={duration}></c-Timer>
         </div>
-        <div class="question container">
+        <div class="box container">
           <div class="question_header">
             <p>Question {question.idx} of {questions.length}</p>
           </div>

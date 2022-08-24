@@ -14,7 +14,7 @@ export default class Quiz extends LightningElement {
   isLoading = true;
   quizId = null;
   end = false;
-  
+
   questions = [];
 
   @track duration = 0;
