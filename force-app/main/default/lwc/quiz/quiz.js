@@ -15,48 +15,48 @@ export default class Quiz extends LightningElement {
   quizId = null;
   end = false;
 
-  test = [
-    { id: 1, idx: 1 },
-    { id: 2, idx: 2 },
-    { id: 3, idx: 3 },
-    { id: 4, idx: 4 },
-    { id: 5, idx: 5 },
-    { id: 6, idx: 6 },
-    { id: 7, idx: 7 },
-    { id: 8, idx: 8 },
-    { id: 9, idx: 9 },
-    { id: 10, idx: 10 },
-    { id: 11, idx: 11 },
-    { id: 12, idx: 12 },
-    { id: 13, idx: 13 },
-    { id: 14, idx: 14 },
-    { id: 15, idx: 15 },
-    { id: 16, idx: 16 },
-    { id: 17, idx: 17 },
-    { id: 18, idx: 18 },
-    { id: 19, idx: 19 },
-    { id: 20, idx: 20 },
-    { id: 21, idx: 21 },
-    { id: 22, idx: 22 },
-    { id: 23, idx: 23 },
-    { id: 24, idx: 24 },
-    { id: 25, idx: 25 },
-    { id: 26, idx: 26 },
-    { id: 27, idx: 27 },
-    { id: 28, idx: 28 },
-    { id: 29, idx: 29 },
-    { id: 30, idx: 30 },
-    { id: 31, idx: 31 },
-    { id: 32, idx: 32 },
-    { id: 33, idx: 33 },
-    { id: 34, idx: 34 },
-    { id: 35, idx: 35 },
-    { id: 36, idx: 36 },
-    { id: 37, idx: 37 },
-    { id: 38, idx: 38 },
-    { id: 39, idx: 39 },
-    { id: 40, idx: 40 }
-  ];
+  // test = [
+  //   { id: 1, idx: 1 },
+  //   { id: 2, idx: 2 },
+  //   { id: 3, idx: 3 },
+  //   { id: 4, idx: 4 },
+  //   { id: 5, idx: 5 },
+  //   { id: 6, idx: 6 },
+  //   { id: 7, idx: 7 },
+  //   { id: 8, idx: 8 },
+  //   { id: 9, idx: 9 },
+  //   { id: 10, idx: 10 },
+  //   { id: 11, idx: 11 },
+  //   { id: 12, idx: 12 },
+  //   { id: 13, idx: 13 },
+  //   { id: 14, idx: 14 },
+  //   { id: 15, idx: 15 },
+  //   { id: 16, idx: 16 },
+  //   { id: 17, idx: 17 },
+  //   { id: 18, idx: 18 },
+  //   { id: 19, idx: 19 },
+  //   { id: 20, idx: 20 },
+  //   { id: 21, idx: 21 },
+  //   { id: 22, idx: 22 },
+  //   { id: 23, idx: 23 },
+  //   { id: 24, idx: 24 },
+  //   { id: 25, idx: 25 },
+  //   { id: 26, idx: 26 },
+  //   { id: 27, idx: 27 },
+  //   { id: 28, idx: 28 },
+  //   { id: 29, idx: 29 },
+  //   { id: 30, idx: 30 },
+  //   { id: 31, idx: 31 },
+  //   { id: 32, idx: 32 },
+  //   { id: 33, idx: 33 },
+  //   { id: 34, idx: 34 },
+  //   { id: 35, idx: 35 },
+  //   { id: 36, idx: 36 },
+  //   { id: 37, idx: 37 },
+  //   { id: 38, idx: 38 },
+  //   { id: 39, idx: 39 },
+  //   { id: 40, idx: 40 }
+  // ];
 
   questions = [];
 
@@ -122,6 +122,7 @@ export default class Quiz extends LightningElement {
   fixData = () => {
     this.questions = this.questions.map((question, idx) => {
       question.idx = idx + 1;
+      question.isAnswered = false;
       // this.duration += question.Duration__c;
       question.Options__r?.forEach((option) => {
         option.isChecked = false;
@@ -169,7 +170,10 @@ export default class Quiz extends LightningElement {
 
   updateQuestions = (qItem) => {
     this.questions = this.questions.map((q) => {
-      if (q.Id === qItem.Id) q = { ...qItem };
+      if (q.Id === qItem.Id) {
+        q = { ...qItem };
+        console.log(q);
+      }
       return q;
     });
   };

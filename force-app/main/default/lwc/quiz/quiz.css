@@ -43,6 +43,25 @@
   width: 1900px;
   max-width: 90%;
 }
+.question2 {
+  padding: 30px 50px;
+  /* min-height: 50vh; */
+  box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+.container2 {
+  margin: auto;
+  width: 2100px;
+  max-width: 100%;
+}
+
+.quiz_info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  /* gap: 20px; */
+}
 
 .question_header {
   text-align: center;
@@ -51,10 +70,8 @@
   justify-content: space-between;
   font-weight: 700;
 }
-
-.quiz_info {
+.time {
+  margin-left: 1000px !important ;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  /* gap: 20px; */
+  margin-top: -35px !important;
 }
