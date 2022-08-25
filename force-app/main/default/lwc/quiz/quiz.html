@@ -28,6 +28,9 @@
           </div>
           <c-Timer class="time" duration={duration}></c-Timer>
         </div>
+        <div class="submit-card container">
+          <button onclick={submitQuiz}>Submit Quiz</button>
+        </div>
         <div class="box container">
           <div class="question_header">
             <p>Question {question.idx} of {questions.length}</p>
@@ -42,7 +45,9 @@
         </div>
       </div>
       <div if:true={end}>
-        <p>Quiz finished!!!</p>
+        <div class="container box">
+          <p>Quiz finished!!!</p>
+        </div>
       </div>
     </template>
     <template if:false={dataIsLoaded}><p>Quiz not found</p></template>

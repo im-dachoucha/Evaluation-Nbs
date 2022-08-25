@@ -7,6 +7,7 @@ import SALESFORCE_LOGO from "@salesforce/resourceUrl/salesforce_logo";
 export default class Quiz extends LightningElement {
   @track idx = 0;
   @track question = {};
+  timeout;
   nbsLogo = NBS_LOGO;
   salesforceLogo = SALESFORCE_LOGO;
   quizName = "";
@@ -72,6 +73,7 @@ export default class Quiz extends LightningElement {
   countDown() {
     this.timeout = setTimeout(() => {
       console.log("time's up!!");
+      this.submitQuiz();
       this.end = true;
     }, this.duration * 1000);
   }
@@ -127,11 +129,21 @@ export default class Quiz extends LightningElement {
 
   updateQuestions = (qItem) => {
     this.questions = this.questions.map((q) => {
-      if (q.Id === qItem.Id) {
-        q = { ...qItem };
-        console.log(q);
-      }
+      if (q.Id === qItem.Id) q = { ...qItem };
       return q;
     });
+  };
+
+  submitQuiz = () => {
+    clearTimeout(this.timeout);
+    const data = this.questions.map((q) => {
+      const answers = q.Options__r.filter((o) => o.isChecked).map((o) => o.Id);
+      return {
+        qId: q.Id,
+        answers
+      };
+    });
+    console.log(data);
+    this.end = true;
   };
 }

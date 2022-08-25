@@ -47,7 +47,7 @@
 .quiz_info {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   align-items: center;
 }
 
@@ -57,4 +57,19 @@
   display: flex;
   justify-content: space-between;
   font-weight: 700;
+}
+
+.submit-card {
+  padding: 30px 50px;
+  display: flex;
+  justify-content: end;
+  /* margin-bottom: 20px; */
+}
+
+.submit-card button {
+  padding: 4px 7px;
+  color: white;
+  background: #00a1e0;
+  font-size: medium;
+  border-radius: 5px;
 }
