@@ -75,7 +75,7 @@ export default class Quiz extends LightningElement {
       console.log("time's up!!");
       this.submitQuiz();
       this.end = true;
-    }, this.duration * 1000);
+    }, this.duration * 100);
   }
 
   fixData = () => {
@@ -132,6 +132,13 @@ export default class Quiz extends LightningElement {
       if (q.Id === qItem.Id) q = { ...qItem };
       return q;
     });
+  };
+
+  handleSubmitQuiz = () => {
+    // eslint-disable-next-line no-restricted-globals, no-alert
+    if (confirm("Make sure you answered all questions")) {
+      this.submitQuiz();
+    }
   };
 
   submitQuiz = () => {
