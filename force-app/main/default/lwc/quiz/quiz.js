@@ -3,6 +3,8 @@ import getQuizById from "@salesforce/apex/QuizController.getQuizById";
 import getQuizQuestions from "@salesforce/apex/QuizController.getQuizQuestions";
 import NBS_LOGO from "@salesforce/resourceUrl/nbs_logo";
 import SALESFORCE_LOGO from "@salesforce/resourceUrl/salesforce_logo";
+import quizTemplate from "./quiz.html";
+import userTemplate from "./userInfo.html";
 
 export default class Quiz extends LightningElement {
   @track idx = 0;
@@ -15,14 +17,25 @@ export default class Quiz extends LightningElement {
   isLoading = true;
   quizId = null;
   end = false;
+  @track quizStarted = false;
 
   questions = [];
 
   @track duration = 0;
 
-  connectedCallback() {
-    this.startQuiz();
+  // connectedCallback() {
+  //   if (this.quizStarted) this.startQuiz();
+  //   //   this.startQuiz();
+  // }
+
+  render() {
+    return this.quizStarted ? quizTemplate : userTemplate;
   }
+
+  switchTemplate = () => {
+    this.quizStarted = true;
+    this.startQuiz();
+  };
 
   async startQuiz() {
     const url = new URL(window.location.href);
@@ -75,7 +88,7 @@ export default class Quiz extends LightningElement {
       console.log("time's up!!");
       this.submitQuiz();
       this.end = true;
-    }, this.duration * 100);
+    }, this.duration * 1000);
   }
 
   fixData = () => {
