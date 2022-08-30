@@ -19,6 +19,11 @@ export default class Quiz extends LightningElement {
   end = false;
   @track quizStarted = false;
 
+  user = { fname: "", lname: "", email: "" };
+  setUser = (e) => {
+    this.user = { ...this.user, [e.target.name]: e.target.value };
+  };
+
   questions = [];
 
   @track duration = 0;
@@ -32,7 +37,17 @@ export default class Quiz extends LightningElement {
     return this.quizStarted ? quizTemplate : userTemplate;
   }
 
-  switchTemplate = () => {
+  switchTemplate = (e) => {
+    e.preventDefault();
+    const emptyFields =
+      this.user.fname.trim().length < 2 ||
+      this.user.fname.trim().length < 2 ||
+      this.user.fname.trim().length < 2;
+    if (emptyFields) {
+      // eslint-disable-next-line no-alert
+      alert("fill all fields with 2+ characters!!");
+      return;
+    }
     this.quizStarted = true;
     this.startQuiz();
   };

@@ -1,6 +1,34 @@
 <template>
-  <input type="text" value={fname} onchange={setfname} />
-  <input type="text" value={lname} onchange={setlname} />
-  <input type="email" value={email} onchange={setemail} />
-  <button onclick={switchTemplate}>start quiz</button>
+  <div class="quiz_header">
+    <div class="imgs">
+      <img src={nbsLogo} alt="Nbs Consulting logo" />
+      <img src={salesforceLogo} alt="Salesforce logo" />
+    </div>
+  </div>
+  <div class="box container">
+    <form onsubmit={switchTemplate}>
+      <input
+        type="text"
+        placeholder="first name"
+        name="fname"
+        value={user.fname}
+        onchange={setUser}
+      />
+      <input
+        type="text"
+        placeholder="last name"
+        name="lname"
+        value={user.lname}
+        onchange={setUser}
+      />
+      <input
+        type="email"
+        placeholder="email"
+        name="email"
+        value={user.email}
+        onchange={setUser}
+      />
+      <button onclick={switchTemplate}>start quiz</button>
+    </form>
+  </div>
 </template>
