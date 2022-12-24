@@ -1,6 +1,7 @@
 import { LightningElement, track } from "lwc";
 import getQuizById from "@salesforce/apex/QuizController.getQuizById";
 import getQuizQuestions from "@salesforce/apex/QuizController.getQuizQuestions";
+import submitAnswers from "@salesforce/apex/QuizController.submitAnswers";
 import NBS_LOGO from "@salesforce/resourceUrl/nbs_logo";
 import SALESFORCE_LOGO from "@salesforce/resourceUrl/salesforce_logo";
 import quizTemplate from "./quiz.html";
@@ -45,7 +46,7 @@ export default class Quiz extends LightningElement {
       this.user.fname.trim().length < 2;
     if (emptyFields) {
       // eslint-disable-next-line no-alert
-      alert("fill all fields with 2+ characters!!");
+      alert("make sure to fill all fields!!");
       return;
     }
     this.quizStarted = true;
@@ -169,16 +170,23 @@ export default class Quiz extends LightningElement {
     }
   };
 
-  submitQuiz = () => {
+  submitQuiz = async () => {
     clearTimeout(this.timeout);
-    const data = this.questions.map((q) => {
-      const answers = q.Options__r.filter((o) => o.isChecked).map((o) => o.Id);
+    const answers = this.questions.map((q) => {
+      const data = q.Options__r.filter((o) => o.isChecked).map((o) => o.Id);
       return {
         qId: q.Id,
-        answers
+        data
       };
     });
+    const data = {
+      quizId: this.quizId,
+      user: this.user,
+      answers
+    };
     console.log(data);
+    const res = await submitAnswers({ data: JSON.stringify(data) });
+    console.log(res);
     this.end = true;
   };
 }

@@ -19,11 +19,30 @@ public without sharing class QuizController {
                                                     FROM Questionquiz__c
                                                     WHERE Quiz__c = :quizId)
                                             ];
-            System.debug(QuestionList);
-            System.debug('test');
             return QuestionList;
 
      } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static integer submitAnswers(string data){
+        try {
+            integer score = 0;
+            // string quizId = data.quizId;
+            QuizData quizData = QuizData.parse(data);
+            
+            // List<Question__c> QuestionsList = [SELECT Value__c, answer__c, (SELECT Id, isCorrect__c FROM Options__r)
+            //                                     FROM Question__c WHERE Id IN (
+            //                                         SELECT Question__c
+            //                                         FROM Questionquiz__c
+            //                                         WHERE Quiz__c = :quizId
+            //                                     )
+            //                                 ];
+            // System.debug(QuestionsList);
+            return score;
+        } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }

@@ -6,13 +6,14 @@
     </div>
   </div>
   <div class="box container">
-    <form onsubmit={switchTemplate}>
+    <form class="form" onsubmit={switchTemplate}>
       <input
         type="text"
         placeholder="first name"
         name="fname"
         value={user.fname}
         onchange={setUser}
+        class="inpt"
       />
       <input
         type="text"
@@ -20,6 +21,7 @@
         name="lname"
         value={user.lname}
         onchange={setUser}
+        class="inpt"
       />
       <input
         type="email"
@@ -27,8 +29,9 @@
         name="email"
         value={user.email}
         onchange={setUser}
+        class="inpt"
       />
-      <button onclick={switchTemplate}>start quiz</button>
+      <button class="submit" onclick={switchTemplate}>start quiz</button>
     </form>
   </div>
 </template>
